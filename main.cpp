@@ -36,23 +36,32 @@ int main()
 	srand(time(nullptr));
 
 	auto ms = SDL::MockupScreen::GetInstance();
-	int i = 10;
+	int i = 300;
 	ms->Clear(Color::White);
+
+	auto ship = utils::SharedPtr<DrawableNode>::Make(
+		test,
+		Vector2<int16_t>{-5, int16_t((rand() % 16) + 32)},
+		Color::Black
+		);
+
+	s.AddNode(
+		ship
+		);
 
 	while (i-->0)
 	{
-		s.AddNode(
-			utils::SharedPtr<DrawableNode>::Make(
-				test,
-				Vector2<int16_t>{int16_t(rand() % 128), int16_t(rand() % 64)},
-				Color::Black
-				)
-			);
+		ms->Clear(Color::White);
+
+		auto curpos = ship->GetPosition();
+		++curpos.x;
+		ship->SetPosition(curpos);
+		
+		s.Draw(ms);
+
+		ms->Render();
+		std::this_thread::sleep_for(1000ms / 30);
 	}
 
-	s.Draw(ms);
-	ms->Render();
-
-	std::this_thread::sleep_for(5s);
 	return 0;
 }
