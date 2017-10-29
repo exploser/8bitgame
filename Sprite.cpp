@@ -3,24 +3,22 @@
 
 using namespace engine;
 
-std::shared_ptr<IDrawable<bool>> engine::sprite::FromAscii(const std::string &str)
+utils::SharedPtr<Drawable> engine::sprite::FromAscii(const std::string &str)
 {
-	using etype = decltype(FromAscii(""))::element_type;
-
-	auto result = std::make_shared<etype>();
+	auto result = utils::SharedPtr<Drawable>::Make();
 	std::stringstream ss(str);
 	std::string line;
-	etype::coord_type y = 0;
+	int16_t y = 0;
 
 	while (std::getline(ss, line))
 	{
-		etype::coord_type x = 0;
+		int16_t x = 0;
 
 		for (auto &&ch : line)
 		{
 			if (ch != ' ')
 			{
-				result->pixels.emplace_back(etype::Pixel{x, y /*, 1*/});
+				result->pixels.emplace_back(Vector2<int16_t>{x, y});
 			}
 
 			result->size.x = std::max(result->size.x, ++x);

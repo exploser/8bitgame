@@ -1,10 +1,10 @@
 #pragma once
 #include <string>
-#include <memory>
 
-#include "IDrawable.hpp"
+#include "Drawable.hpp"
+#include "SharedPtr.hpp"
 
 namespace engine::sprite
 {
-std::shared_ptr<IDrawable<bool>> FromAscii(const std::string &str);
+utils::SharedPtr<Drawable> FromAscii(const std::string &str);
 }
