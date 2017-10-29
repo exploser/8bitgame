@@ -1,10 +1,10 @@
 #pragma once
 #include <string>
+#include <memory>
 
 #include "IDrawable.hpp"
 
-struct Sprite :
-	IDrawable<bool>
+namespace engine::sprite
 {
-	static Sprite FromAscii(const std::string &str);
-};
+std::shared_ptr<IDrawable<bool>> FromAscii(const std::string &str);
+}

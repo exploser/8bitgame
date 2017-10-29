@@ -2,6 +2,8 @@
 #include <memory>
 #include "BasicBWScreen.hpp"
 
+namespace engine::SDL
+{
 class MockupScreen :
 	public BasicBWScreen
 {
@@ -15,3 +17,4 @@ public:
 	virtual void Render() override;
 	virtual void Clear(color_type color) override;
 };
+}

@@ -1,25 +1,29 @@
 #include "Sprite.hpp"
 #include <sstream>
 
-Sprite Sprite::FromAscii(const std::string &str)
+using namespace engine;
+
+std::shared_ptr<IDrawable<bool>> engine::sprite::FromAscii(const std::string &str)
 {
-	Sprite result;
+	using etype = decltype(FromAscii(""))::element_type;
+
+	auto result = std::make_shared<etype>();
 	std::stringstream ss(str);
 	std::string line;
-	coord_type y = 0;
+	etype::coord_type y = 0;
 
 	while (std::getline(ss, line))
 	{
-		coord_type x = 0;
+		etype::coord_type x = 0;
 
 		for (auto &&ch : line)
 		{
 			if (ch != ' ')
 			{
-				result.pixels.emplace_back(Sprite::Pixel{x, y/*, 1*/});
+				result->pixels.emplace_back(etype::Pixel{x, y /*, 1*/});
 			}
 
-			++x;
+			result->size.x = std::max(result->size.x, ++x);
 		}
 
 		if (y == 0 && line.empty())
@@ -27,7 +31,7 @@ Sprite Sprite::FromAscii(const std::string &str)
 			continue;
 		}
 
-		++y;
+		result->size.y = ++y;
 	}
 
 	return result;

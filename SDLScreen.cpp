@@ -5,6 +5,8 @@
 SDL_Window *window = nullptr;
 SDL_Renderer *renderer = nullptr;
 
+using namespace engine::SDL;
+
 MockupScreen::MockupScreen()
 {
 	int flags = SDL_WINDOW_SHOWN;

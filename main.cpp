@@ -7,8 +7,9 @@
 #include <thread>
 
 using namespace std::literals;
+using namespace engine;
 
-static Sprite test = Sprite::FromAscii(
+static auto test = sprite::FromAscii(
 	R"(
  ####
 #    ################
@@ -28,13 +29,13 @@ int main()
 {
 	srand(time(nullptr));
 
-	auto ms = MockupScreen::GetInstance();
+	auto ms = SDL::MockupScreen::GetInstance();
 	int64_t i = 10;
 	ms->Clear(1);
 
 	while (i-->0)
 	{
-		ms->Draw(&test, rand() % 128, rand() % 64, 0);
+		ms->Draw(*test, rand() % 128, rand() % 64, 0);
 	}
 
 	ms->Render();

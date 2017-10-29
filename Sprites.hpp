@@ -1,15 +1,18 @@
 #pragma once
 #include "Sprite.hpp"
 
-namespace sprites
+namespace engine::sprite
 {
-static Sprite test = Sprite::FromAscii(
-R"(
+inline namespace samples
+{
+static auto test = sprite::FromAscii(
+	R"(
 ##### #####  #### #####
   #   #     #       #  
   #   #####  ###    #  
   #   #         #   #  
   #   ##### ####    #  
 )"
-);
+	);
+}
 }
